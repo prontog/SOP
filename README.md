@@ -24,7 +24,7 @@ Type | Description | Payload Spec
 -----|-------------|-----------|--------------
 NO | New Order | [NO.csv](specs/NO.csv)
 OC | Order Confirmation | [OC.csv](specs/OC.csv)
-TR | Trade | [TR.csv](specs/TR_full.csv)
+TR | Trade | [TR.csv](specs/TR.csv)
 RJ | Rejection | [RJ.csv](specs/RJ.csv)
 EN | Exchange News | [EN.csv](specs/EN.csv)
 BO | Best Bid and Offer | [BO.csv](specs/BO.csv)
