@@ -30,7 +30,21 @@ for f in $@; do
 	# Trim middle |.
 	s/[[:space:]]*|[[:space:]]*/|/g
 	# Delete empty rows.
-	/^$/d
+	/^$/d' $f | awk '
+	BEGIN {
+		FS = "|"
+		OFS = "|"
+	}
+	{
+		for (i = 1; i <= NF; i++) {
+			if (match($i, /,/)) {
+				$i = "\"" $i "\""
+			}
+		}
+		
+		print
+	}
+	' | sed '
 	# Replace | separator with ,
-	s/|/,/g' $f > ${f/$".mdtable"/.csv}
+	s/|/,/g' > ${f/$".mdtable"/.csv}
 done
