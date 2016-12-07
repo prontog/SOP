@@ -3,42 +3,72 @@
 # Function to output usage information
 usage() {
   cat <<EOF
-Usage: ${0##*/} HEADER_LEN RECORDNAME CSV_SPEC...
-Converts CVS specs into XML Copybook format for RecordEditor.
+Usage: ${0##*/} [OPTIONS] CSV_SPEC...
+Converts CVS specs into XML Copybook format for RecordEditor. The XML Copybook is output to STDOUT.
 
-HEADER_LEN is the length of the header part of the line.
-RECORDNAME is the name of the record in the RecordEditor XML layout.
+Options:
+  -h	display this text and exit
+  -p	the name of the main RECORD tag of the RecordEditor XML layout
+  -H	the length of the header part of the line
+  
+Example:
+  ${0##*/} -p sop -H 10 OC.csv NO.csv TR.csv
+
 EOF
   exit 1
 }
+# Function to print an error message and exit with exit code 1.
+error() {
+	echo "${0##*/}: $1"
+	exit 1
+}
 
-if [[ $# -lt 4 ]]; then
-    usage
+# Handle CLI options.
+while getopts "hp:H:" option
+do
+case $option in
+    p) PROTOCOL_NAME=$OPTARG;;
+	H) HEADER_LEN=$OPTARG;;
+	h) usage;;
+	\?) exit 1;;
+esac
+done
+shift $(( $OPTIND - 1 ))
+
+if [[ -z $PROTOCOL_NAME ]]; then
+    error "-p is not optional"
 fi
 
-HEADER_LEN=$1
-shift
-RECORDNAME=$1
-shift
+if [[ $# -lt 1 ]]; then
+    error "You need to pass at least one CSV_SPEC"
+fi
 
 set -o errexit
 
 cat <<EOF
 <?xml version="1.0" ?>
-<RECORD RECORDNAME="$RECORDNAME" COPYBOOK="" DELIMITER="&lt;Tab&gt;" FILESTRUCTURE="Default" STYLE="0" 
+<RECORD RECORDNAME="$PROTOCOL_NAME" COPYBOOK="" DELIMITER="&lt;Tab&gt;" FILESTRUCTURE="Default" STYLE="0" 
         RECORDTYPE="GroupOfRecords" LIST="Y" QUOTE="" RecSep="default">
 	<RECORDS>
 EOF
 
 for s in $*; do
+	if [[ ! -f $s ]]; then
+		error "$s is not a file"
+	fi
+
 	SPEC_NAME=${s/.csv/}
 cat <<EOF
-		<RECORD RECORDNAME="$RECORDNAME: $SPEC_NAME" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
-		        DESCRIPTION="$RECORDNAME: $SPEC_NAME" FILESTRUCTURE="Default" STYLE="0" ECORDTYPE="RecordLayout"
+		<RECORD RECORDNAME="$PROTOCOL_NAME: $SPEC_NAME" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
+		        DESCRIPTION="$PROTOCOL_NAME: $SPEC_NAME" FILESTRUCTURE="Default" STYLE="0" ECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="$SPEC_NAME">
 			<FIELDS>
-				<FIELD NAME="Header"  POSITION="1" LENGTH="$HEADER_LEN" TYPE="Char"/>
 EOF
+
+	if [[ $HEADER_LEN -ne 0 ]]; then
+		echo '				<FIELD NAME="Header"  POSITION="1" LENGTH="'$HEADER_LEN'" TYPE="Char"/>'
+	fi
+
 	awk -v header_len=$HEADER_LEN '
 	BEGIN {
 		FS = ","

@@ -8,7 +8,7 @@ sop: $(sop_specs) sop.xml
 
 sop.xml: $(sop_specs)
 	#length of "09:20:05.034 < " is 15
-	./csv2xmlcopybook.sh 15 "SOP log" $? > $@
+	./csv2xmlcopybook.sh -H 15 -p "SOP log" $? > $@
 	
 %.csv: %.mdtable
 	./mdtable_to_csv.sh $?
