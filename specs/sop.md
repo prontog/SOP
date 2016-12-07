@@ -1,27 +1,21 @@
-Simple Order Protocol (sop), an imaginary protocol.
-===================================================
-
 Introduction
+============
+
+SOP is a simple, text protocol for an imaginary stock exchange. Use it to place simple orders and make simple trades. I created it for my [blog](https://prontog.wordpress.com/).
+
+The protocol
 ------------
 
-SOP is a simple, text protocol for an imaginary stock exchange. Use it to place simple orders and make simple trades.
+The SOP message types follow the format HEADER|PAYLOAD|TRAILER (note that '|' is not included in the protocol).
 
-All message types follow the format HEADER|PAYLOAD|TRAILER (note that '|' is not included in the protocol).
-
-Header
-------
-
-The HEADER is very simple:
+### Header
 
 | Field | Length | Type    | Description                                     |
 |-------|--------|---------|-------------------------------------------------|
 | SOH   | 1      | STRING  | Start of header.                                |
 | LEN   | 3      | NUMERIC | Length of the payload (i.e. no header/trailer). |
 
-Trailer
--------
-
-The TRAILER is even simpler:
+### Trailer
 
 | Field | Length | Type   | Description  |
 |-------|--------|--------|--------------|
@@ -114,7 +108,7 @@ The message types are:
 
 ### LO - Lough Out
 
-\*\*experimental\*\*
+**\*\* experimental \*\***
 
 | Field   | Length | Type | Description                                                 |
 |---------|--------|------|-------------------------------------------------------------|
