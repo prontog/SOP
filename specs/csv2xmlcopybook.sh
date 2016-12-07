@@ -3,14 +3,16 @@
 # Function to output usage information
 usage() {
   cat <<EOF
-Usage: ${0##*/} [OPTIONS] CSV_SPEC...
+Usage: ${0##*/} -p PROT [OPTIONS] CSV_SPEC...
 Converts CVS specs into XML Copybook format for RecordEditor. The XML Copybook is output to STDOUT.
 
-Options:
-  -h	display this text and exit
-  -p	the name of the main RECORD tag of the RecordEditor XML layout
-  -H	the length of the header part of the line
-  
+Options:  
+  -p=PROT   the name to be used as RECORDNAME in the main RECORD tag as well
+              as a prefix to the RECORDNAME of each child RECORD tag
+  -h        display this text and exit
+  -H=LEN    the length of the header field of each RECORD. This can be handy
+              if you need to skip some characters from the start of the line
+
 Example:
   ${0##*/} -p sop -H 10 OC.csv NO.csv TR.csv
 
