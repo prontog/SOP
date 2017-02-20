@@ -3,7 +3,7 @@
         RECORDTYPE="GroupOfRecords" LIST="Y" QUOTE="" RecSep="default">
 	<RECORDS>
 		<RECORD RECORDNAME="SOP log: NO" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
-		        DESCRIPTION="SOP log: NO" FILESTRUCTURE="Default" STYLE="0" ECORDTYPE="RecordLayout"
+		        DESCRIPTION="SOP log: NO" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="NO">
 			<FIELDS>
 				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
@@ -18,7 +18,7 @@
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: OC" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
-		        DESCRIPTION="SOP log: OC" FILESTRUCTURE="Default" STYLE="0" ECORDTYPE="RecordLayout"
+		        DESCRIPTION="SOP log: OC" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="OC">
 			<FIELDS>
 				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
@@ -34,7 +34,7 @@
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: TR" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
-		        DESCRIPTION="SOP log: TR" FILESTRUCTURE="Default" STYLE="0" ECORDTYPE="RecordLayout"
+		        DESCRIPTION="SOP log: TR" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="TR">
 			<FIELDS>
 				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
@@ -47,7 +47,7 @@
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: RJ" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
-		        DESCRIPTION="SOP log: RJ" FILESTRUCTURE="Default" STYLE="0" ECORDTYPE="RecordLayout"
+		        DESCRIPTION="SOP log: RJ" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="RJ">
 			<FIELDS>
 				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
@@ -58,7 +58,7 @@
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: EN" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
-		        DESCRIPTION="SOP log: EN" FILESTRUCTURE="Default" STYLE="0" ECORDTYPE="RecordLayout"
+		        DESCRIPTION="SOP log: EN" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="EN">
 			<FIELDS>
 				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
@@ -69,7 +69,7 @@
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: BO" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
-		        DESCRIPTION="SOP log: BO" FILESTRUCTURE="Default" STYLE="0" ECORDTYPE="RecordLayout"
+		        DESCRIPTION="SOP log: BO" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="BO">
 			<FIELDS>
 				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
@@ -86,7 +86,7 @@
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: LO" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
-		        DESCRIPTION="SOP log: LO" FILESTRUCTURE="Default" STYLE="0" ECORDTYPE="RecordLayout"
+		        DESCRIPTION="SOP log: LO" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="LO">
 			<FIELDS>
 				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
