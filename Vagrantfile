@@ -94,10 +94,15 @@ Vagrant.configure(2) do |config|
     sudo python setup.py install
     cd -
     # Install R
+	sudo apt-get install -y libssl-dev libcurl4-openssl-dev
     sudo apt-get install -y r-base r-base-dev
+	sudo Rscript $OASIS_UTILS/stats/prepare_r_env.R
     # Install tshark
     sudo apt-get install -y tshark
     # Setup your timezone
     tzselect
-    SHELL
+	# Setup environment vars
+	echo 'PATH=${PATH}:/vagrant/stats' >> ~/.bashrc
+	echo 'export SOP_SPECS_PATH=/vagrant/specs' >> ~/.bashrc
+  SHELL
 end
