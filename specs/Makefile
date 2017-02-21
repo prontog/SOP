@@ -3,13 +3,21 @@ sop_mdtables := $(foreach t, $(sop_types), $(t).mdtable)
 sop_specs := $(foreach t, $(sop_types), $(t).csv)
 sop_md := sop.md
 
-sop: $(sop_specs) sop.xml
+dissectors := $(shell find -name '*.lua')
+
+sop: $(sop_specs) sop.xml sop_dissector.zip
 	touch $@
 
 sop.xml: $(sop_specs)
 	#length of "09:20:05.034 < " is 15
 	./csv2xmlcopybook.sh -H 15 -p "SOP log" $? > $@
 	
+sop_dissector.zip: $(sop_specs) $(dissectors)
+	@echo Packing dissector into dissector.zip...
+	zip sop_dissector.zip *.csv
+	zip sop_dissector.zip *.lua
+	zip -j sop_dissector.zip $(WSDH_SCRIPT_PATH)/*.lua
+
 %.csv: %.mdtable
 	./mdtable_to_csv.sh $?
 
@@ -24,6 +32,7 @@ $(sop_mdtables): $(sop_md)
 # Clean up rules.
 clean: clean_record_editor clean_csv clean_mdtable clean_md 
 	-rm sop
+	-rm sop_dissector.zip
 
 clean_record_editor:
 	-rm sop.xml
