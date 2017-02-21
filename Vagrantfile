@@ -99,10 +99,15 @@ Vagrant.configure(2) do |config|
 	sudo Rscript $OASIS_UTILS/stats/prepare_r_env.R
     # Install tshark
     sudo apt-get install -y tshark
-    # Setup your timezone
+	# Clone ws_dissector_helper
+	git clone https://github.com/prontog/ws_dissector_helper
+    echo 'export WSDH_SCRIPT_PATH=~/ws_dissector_helper/src' >> ~/.bashrc
+	echo 'export SOP_SPECS_PATH=/vagrant/specs' >> ~/.bashrc
+	mkdir ~/.wireshark
+	ln -s /vagrant/specs/init.lua ~/.wireshark/
+	# Setup your timezone
     tzselect
 	# Setup environment vars
 	echo 'PATH=${PATH}:/vagrant/stats' >> ~/.bashrc
-	echo 'export SOP_SPECS_PATH=/vagrant/specs' >> ~/.bashrc
   SHELL
 end
