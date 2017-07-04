@@ -21,7 +21,7 @@ ETX | 1 | STRING | End of text.
 The message types are:
 
 Type | Description | Payload Spec
------|-------------|-----------|--------------
+-----|-------------|-----------
 NO | New Order | [NO.csv](specs/NO.csv)
 OC | Order Confirmation | [OC.csv](specs/OC.csv)
 TR | Trade | [TR.csv](specs/TR.csv)
@@ -31,5 +31,3 @@ BO | Best Bid and Offer | [BO.csv](specs/BO.csv)
 LO | Lough Out Loud (experimental) | [LO.csv](specs/LO.csv)
 
 The [specs](specs) dir contains the specification for each message type in CSV format.
-
-
