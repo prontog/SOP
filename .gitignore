@@ -1,1 +1,4 @@
 *.html
+.vagrant
+Vagrantfile.local
+.Rhistory
