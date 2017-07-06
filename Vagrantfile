@@ -118,6 +118,13 @@ Vagrant.configure(2) do |config|
 	mkdir ~/.wireshark
 	ln -s /vagrant/network/init.lua ~/.wireshark/
 
+    # Install csvkit
+    sudo apt-get install python-pip
+    sudo pip install --upgrade pip
+    sudo pip install --upgrade setuptools
+    sudo pip install csvkit==0.9.1
+
+
     # Add necessary env vars:
     echo Updating .bashrc
     echo "source /vagrant/env.sh" >> ~/.bashrc
