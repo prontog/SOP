@@ -6,3 +6,4 @@ export SOP=${BASH_SOURCE%/*}
 export WSDH_SCRIPT_PATH=~/ws_dissector_helper/src/
 export SOP_SPECS_PATH=$SOP/specs/
 # Update PATH with all dirs containing scripts.
+PATH=${PATH}:$SOP/network

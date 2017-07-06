@@ -116,7 +116,7 @@ Vagrant.configure(2) do |config|
 	# Clone ws_dissector_helper
 	git clone https://github.com/prontog/ws_dissector_helper
 	mkdir ~/.wireshark
-	ln -s /vagrant/specs/init.lua ~/.wireshark/
+	ln -s /vagrant/network/init.lua ~/.wireshark/
 
     # Add necessary env vars:
     echo Updating .bashrc

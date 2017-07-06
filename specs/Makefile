@@ -11,12 +11,11 @@ sop: $(sop_specs) sop.xml sop_dissector.zip
 sop.xml: $(sop_specs)
 	#length of "09:20:05.034 < " is 15
 	./csv2xmlcopybook.sh -H 15 -p "SOP log" $? > $@
-	
+
 sop_dissector.zip: $(sop_specs) $(dissectors)
 	@echo Packing dissector into dissector.zip...
 	zip sop_dissector.zip *.csv
-	zip sop_dissector.zip *.lua
-	zip -j sop_dissector.zip $(WSDH_SCRIPT_PATH)/*.lua
+	zip -j sop_dissector.zip $(SOP)/network/*.lua $(WSDH_SCRIPT_PATH)/*.lua
 
 %.csv: %.mdtable
 	./mdtable_to_csv.sh $?
@@ -30,18 +29,18 @@ $(sop_mdtables): $(sop_md)
 	pandoc --smart --filter ./despan.py --to markdown_github $? | iconv -f utf8 -t ascii//TRANSLIT > $@
 
 # Clean up rules.
-clean: clean_record_editor clean_csv clean_mdtable clean_md 
+clean: clean_record_editor clean_csv clean_mdtable clean_md
 	-rm sop
 	-rm sop_dissector.zip
 
 clean_record_editor:
 	-rm sop.xml
-	
+
 clean_csv:
 	-rm $(sop_specs)
-	
-clean_mdtable: 
+
+clean_mdtable:
 	-rm $(sop_mdtables)
 
-clean_md: 
+clean_md:
 	-rm $(sop_md)
