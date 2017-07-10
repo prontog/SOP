@@ -88,14 +88,23 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    set -o errexit
     sudo apt-get update
 
+    # Install python
+    sudo apt-get install python -y
+
 	# Install Pandoc
-    sudo apt-get install -y pandoc
+    # PANDOC_VERSION=1.19.2.1
+    curl -LR -O -s https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb
+    sudo dpkg --install pandoc-1.19.2.1-1-amd64.deb
     git clone https://github.com/jgm/pandocfilters
     cd pandocfilters
     sudo python setup.py install
     cd
+
+    # Install ZIP
+    sudo apt-get install zip -y
 
 	# Install R
 	#sudo apt-get install -y libssl-dev libcurl4-openssl-dev
@@ -106,15 +115,11 @@ Vagrant.configure(2) do |config|
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y tshark
 	# Clone ws_dissector_helper
 	git clone https://github.com/prontog/ws_dissector_helper
-    echo 'export WSDH_SCRIPT_PATH=~/ws_dissector_helper/src' >> ~/.bashrc
-	echo 'export SOP_SPECS_PATH=/vagrant/specs' >> ~/.bashrc
 	mkdir ~/.wireshark
 	ln -s /vagrant/specs/init.lua ~/.wireshark/
 
-	# Setup your timezone
-    # tzselect
-
-	# Setup environment vars
-	#echo 'PATH=${PATH}:/vagrant/stats' >> ~/.bashrc
+    # Add necessary env vars:
+    echo Updating .bashrc
+    echo "source /vagrant/env.sh" >> ~/.bashrc
   SHELL
 end
