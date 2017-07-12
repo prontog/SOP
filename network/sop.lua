@@ -125,7 +125,7 @@ local function parseMessage(buffer, pinfo, tree)
     
     	pinfo.cols.protocol = sop.name
 	else
-		protoHelper:trace('Frame: ' .. pinfo.number .. ' Parsing did not complete.')
+		helper:trace('Frame: ' .. pinfo.number .. ' Parsing did not complete.')
 	end
 	
 	return bytesConsumed
