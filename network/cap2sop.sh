@@ -52,6 +52,8 @@ do
 	BEGIN {
 		FS = ","
 		OFS = ","
+		# This was needed for Cygwin with "Windows" tshark.
+		RS = "\r\n|\n"
 		# These are the msg types that contain the clientId field. All other
 		# message types will be discarded.
 		msgTypesToPrint = "NO,OC,RJ"
@@ -91,8 +93,8 @@ do
 		}
 
 		for(i in filteredMsgTypes) {
-			print frame, dateTime, filteredMsgTypes[i], clientIds[i],
-				  ethSrc, ethDst, ipSrc, ipDst, CAP_FILE
+			print frame, dateTime, filteredMsgTypes[i], clientIds[i], ethSrc, ethDst, 
+				  ipSrc, ipDst, CAP_FILE
 		}
 
 		# Clean up array filteredMsgTypes before moving to the next line.
