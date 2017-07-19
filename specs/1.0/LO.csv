@@ -1,0 +1,2 @@
+Field,Length,Type,Description
+msgType,2,,Defines message type ALWAYS FIRST FIELD IN MESSAGE PAYLOAD.
