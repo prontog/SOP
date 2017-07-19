@@ -3,6 +3,14 @@ Introduction
 
 SOP is a simple, text protocol for an imaginary stock exchange. Use it to place simple orders and make simple trades. I created it for my [blog](https://prontog.wordpress.com/).
 
+Versions
+========
+
+| Version number | Release date | Details                               |
+|----------------|--------------|---------------------------------------|
+| 1.0            | 01/01/2015   | Initial version                       |
+| 2.0            | 10/07/2017   | -   Resized RJ.text to 60 characters. |
+
 The protocol
 ------------
 
@@ -46,7 +54,7 @@ The message types are:
 | symbol    | 12     |         | Ticker symbol.                                              |
 | price     | 8      | NUMERIC | Price per unit of quantity (e.g. per share)                 |
 | clientId  | 16     |         | Unique identifier for Order as assigned by the client.      |
-| accountId | 16     |         | Identifier for the account of be used for clearance.        |
+| accountId | 16     |         | Identifier for the account to be used for clearance.        |
 
 ### OC - Order Confirmation
 
@@ -60,7 +68,7 @@ The message types are:
 | symbol    | 12     |         | Ticker symbol.                                              |
 | price     | 8      | NUMERIC | Price per unit of quantity (e.g. per share)                 |
 | clientId  | 16     |         | Unique identifier for Order as assigned by the client.      |
-| accountId | 16     |         | Identifier for the account of be used for clearance.        |
+| accountId | 16     |         | Identifier for the account to be used for clearance.        |
 
 ### TR - Trade
 
@@ -80,7 +88,7 @@ The message types are:
 | msgType       | 2      |         | Defines message type ALWAYS FIRST FIELD IN MESSAGE PAYLOAD. |
 | clientId      | 16     |         | Unique identifier for Order as assigned by the client.      |
 | rejectionCode | 3      | NUMERIC | Rejection Code                                              |
-| text          | 48     |         | Text explaining the rejection                               |
+| text          | 60     |         | Text explaining the rejection                               |
 
 ### EN - Exchange News
 
@@ -115,6 +123,6 @@ The message types are:
 | msgType | 2      |      | Defines message type ALWAYS FIRST FIELD IN MESSAGE PAYLOAD. |
 
 Appendix
---------
+========
 
 Blah blah blah.

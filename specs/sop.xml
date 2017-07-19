@@ -54,7 +54,7 @@
 				<FIELD NAME="msgType"  POSITION="16" LENGTH="2" TYPE="Char"/>
 				<FIELD NAME="clientId"  POSITION="18" LENGTH="16" TYPE="Char"/>
 				<FIELD NAME="rejectionCode"  POSITION="34" LENGTH="3" TYPE="Char"/>
-				<FIELD NAME="text"  POSITION="37" LENGTH="48" TYPE="Char"/>
+				<FIELD NAME="text"  POSITION="37" LENGTH="60" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: EN" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
