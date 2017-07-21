@@ -50,14 +50,14 @@ The easiest way to try out this repo, is using *Vagrant* with *VirtualBox*. Skip
 1. Install [Vagrant](https://www.vagrantup.com/). Make sure that *vagrant* is in the PATH.
 1. Install the following vagrant plugins:
 	1. vagrant-hostmanager
-	1. vagrant-proxyconf (if you are behind a proxy)
 	1. vagrant-vbguest
 	1. vagrant-cachier
 	1. vagrant-share
+    1. vagrant-proxyconf (if you are behind a proxy)
 
 See `vagrant --help` for more info on installing plugins. Also note that the HTTP_PROXY and HTTPS_PROXY env vars should be set if you are behind a proxy.
 
-Note that you can create the file *Vagrantfile.local* and setup the `config.vm.network` and `config.proxy` settings if you need to set a specific *IP* and/or you are behind a proxy. You can also add "synced folders". For example:
+If you need to set a specific *IP* and/or you are behind a proxy, you can create the file *Vagrantfile.local* and setup the `config.vm.network` and `config.proxy` settings. You can also add extra "synced folders" of you wish. For example:
 
 ```ruby
 config.vm.network "private_network", ip: "192.168.56.7"
