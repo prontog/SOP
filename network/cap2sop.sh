@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Function to output usage information
 usage() {
@@ -35,18 +35,21 @@ TSHARK_DISP_FILTER="-Y sop"
 TSHARK_OUT_FIELDS="-e frame.number -e _ws.col.Time -e sop.msgtype -e sop.clientid -e eth.src -e eth.dst -e ip.src -e ip.dst"
 TSHARK_CMD="tshark $SOP_TRACE $TSHARK_DISP_FILTER -T fields -E header=n -E separator=',' -E aggregator=';' -o column.format:'Time,%At' $TSHARK_OUT_FIELDS"
 
+set -o errexit
+
 # Print header.
 echo frame,dateTime,msgType,clientId,ethSrc,ethDst,ipSrc,ipDst,capFile
 
 until [[ -z $1 ]]
 do
 	if [[ ! -f $1 ]]; then
-		echo $1 is not a file > /dev/stderr
+		echo $1 is not a file >&2
 	fi
 
 	CAP_FILE=$1
 
-	set -o errexit
+    # Update SOP specs env vars with the appropriate values.
+    . $SOP/specs/sop_specs_path.sh $CAP_FILE
 
 	eval $TSHARK_CMD -r $CAP_FILE $TSHARK_STDERR | awk -v CAP_FILE="${CAP_FILE##*/}" '
 	BEGIN {
@@ -93,7 +96,7 @@ do
 		}
 
 		for(i in filteredMsgTypes) {
-			print frame, dateTime, filteredMsgTypes[i], clientIds[i], ethSrc, ethDst, 
+			print frame, dateTime, filteredMsgTypes[i], clientIds[i], ethSrc, ethDst,
 				  ipSrc, ipDst, CAP_FILE
 		}
 
