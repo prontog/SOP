@@ -61,14 +61,17 @@ local msg_specs, msg_parsers = helper:loadSpecs(msg_types,
 -- Returns the length of the message from the end of header up to the start
 -- of trailer.
 local function getMsgDataLen(msgBuffer)
-	return helper:getHeaderValue(msgBuffer, SopFields.LEN)
+	return tonumber(helper:getHeaderValue(msgBuffer, SopFields.LEN))
 end
 
 -- Returns the length of whole the message. Includes header and trailer.
 local function getMsgLen(msgBuffer)
-	return header:len() +
-		   getMsgDataLen(msgBuffer) +
-		   trailer:len()
+	local msgdataLen = getMsgDataLen(msgBuffer)
+	if msgdataLen == nil then
+		return nil
+	end
+
+	return header:len() + msgdataLen + trailer:len()
 end
 
 -- Parse a specific type of message from a buffer and add it to the tree.
@@ -80,7 +83,7 @@ local function parseMessage(buffer, pinfo, tree)
 	-- Messages start with SOH.
 
 	if SopFields.SOH:value(buffer) ~= SopFields.SOH.fixedValue then
-		helper:trace('Frame: ' .. pinfo.number .. ' No SOH.')
+		helper:warn('No SOH.')
 		return 0
 	end
 
@@ -94,8 +97,7 @@ local function parseMessage(buffer, pinfo, tree)
 	local msgType = buffer(header:len(), msgTypeLen):string()
 	local msgSpec = msg_specs[msgType]
 	if not msgSpec then
-		helper:trace('Frame: ' .. pinfo.number ..
-					 ' Unknown message type: ' .. msgType)
+		helper:warn('Unknown message type: ' .. msgType)
 		return 0
 	end
 
@@ -104,8 +106,7 @@ local function parseMessage(buffer, pinfo, tree)
 	local msgLen = getMsgLen(buffer)
 	local msgDataLen = getMsgDataLen(buffer)
 	if buffer:len() < msgLen then
-		helper:trace('Frame: ' .. pinfo.number ..
-					 ' buffer:len [' .. buffer:len() .. '] < msgLen [' .. msgLen .. ']')
+		helper:trace('buffer:len [' .. buffer:len() .. '] < msgLen [' .. msgLen .. ']')
 		return -DESEGMENT_ONE_MORE_SEGMENT
 	end
 
@@ -113,8 +114,7 @@ local function parseMessage(buffer, pinfo, tree)
 	-- If no parser is found for this type of message, reject the whole
 	-- packet.
 	if not msgParse then
-		helper:trace('Frame: ' .. pinfo.number ..
-					 ' Not supported message type: ' .. msgType)
+		helper:warn('Not supported message type: ' .. msgType)
 		return 0
 	end
 
