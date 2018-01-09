@@ -8,22 +8,48 @@ Extract SOP message information from CAP_FILEs.
 
 Options:
   -h	display this help text and exit
-  -v	increase verbosity
+  -v	increase verbosity (stderr). A single -v will show critical, error, info
+        and debug messages. Double -v will show trace messages as well. Note
+        that double -v is VERY verbose. Use for troubleshooting a dissector.
+
+Example:
+  ${0##*/} -v sop.pcapng
 EOF
-  exit 1
+  exit 1 >&2
 }
+# Print an error message
+error() {
+	echo "${0##*/}: $*" >&2
+	exit 1
+}
+verbose_echo() {
+    if [[ $verbosity_level -ge 1 ]]; then
+	   echo ${0##*/}: $* >&2
+    fi
+}
+# Increase verbosity level. Default is quiet (0).
+verbosity_level=0
+increase_verbosity() {
+    verbosity_level=$((verbosity_level + 1))
+}
+
+while getopts "hv" option
+do
+	case $option in
+		v) increase_verbosity;;
+		\?) usage;;
+	esac
+done
 
 # By default redirect tshark's STDERR to /dev/null.
 TSHARK_STDERR='2>/dev/null'
 SOP_TRACE=
-while getopts "hv" option
-do
-	case $option in
-		v) TSHARK_STDERR=
-		   SOP_TRACE="-o sop.trace:TRUE";;
-		\?) usage;;
-	esac
-done
+if [[ $verbosity_level -ge 1 ]]; then
+	TSHARK_STDERR=
+fi
+if [[ $verbosity_level -ge 2 ]]; then
+	SOP_TRACE="-o sop.trace:TRUE"
+fi
 
 shift $(( $OPTIND - 1 ))
 
@@ -33,7 +59,7 @@ fi
 
 TSHARK_DISP_FILTER="-Y sop"
 TSHARK_OUT_FIELDS="-e frame.number -e _ws.col.Time -e sop.msgtype -e sop.clientid -e eth.src -e eth.dst -e ip.src -e ip.dst"
-TSHARK_CMD="tshark $SOP_TRACE $TSHARK_DISP_FILTER -T fields -E header=n -E separator=',' -E aggregator=';' -o column.format:'Time,%At' $TSHARK_OUT_FIELDS"
+TSHARK_CMD="tshark $SOP_TRACE $TSHARK_DISP_FILTER -T fields -E header=n -E separator=',' -E aggregator=';' -o gui.column.format:'Time,%At' $TSHARK_OUT_FIELDS"
 
 set -o errexit
 
@@ -47,6 +73,8 @@ do
 	fi
 
 	CAP_FILE=$1
+
+    verbose_echo "processing $CAP_FILE" >&2
 
     # Update SOP specs env vars with the appropriate values.
     . $SOP/specs/sop_specs_path.sh $CAP_FILE
