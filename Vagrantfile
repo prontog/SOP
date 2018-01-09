@@ -113,6 +113,10 @@ Vagrant.configure(2) do |config|
 
 	# Install tshark
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y tshark
+	# Allow current user to access the network interfaces.
+	sudo groupadd wireshark
+	sudo usermod -a -G wireshark $(whoami)
+	sudo setcap cap_net_raw,cap_net_admin=eip $(which dumpcap)
 	# Clone ws_dissector_helper
 	git clone https://github.com/prontog/ws_dissector_helper
 	mkdir ~/.wireshark
