@@ -24,6 +24,8 @@ $(sop_mdtables): $(sop_md)
 	# Extract the md tables for each message type.
 	./sop_split_to_mdtable.sh $?
 
+.INTERMEDIATE: $(sop_mdtables)
+	
 %.md: %.docx
 	# Convert documentation from docx format to md.
 	pandoc --smart --filter ./despan.py --to markdown_github $? | iconv -f utf8 -t ascii//TRANSLIT > $@

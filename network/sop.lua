@@ -106,7 +106,7 @@ local function parseMessage(buffer, pinfo, tree)
 	local msgLen = getMsgLen(buffer)
 	local msgDataLen = getMsgDataLen(buffer)
 	if buffer:len() < msgLen then
-		helper:trace('buffer:len [' .. buffer:len() .. '] < msgLen [' .. msgLen .. ']')
+		helper:info('buffer:len < msgLen [' .. buffer:len() .. ' < ' .. msgLen .. ']')
 		return -DESEGMENT_ONE_MORE_SEGMENT
 	end
 
@@ -124,7 +124,7 @@ local function parseMessage(buffer, pinfo, tree)
     	subtree:append_text(', Len: ' .. msgLen)
 
     	pinfo.cols.protocol = sop.name
-	end
+    end
 
 	return bytesConsumed
 end
