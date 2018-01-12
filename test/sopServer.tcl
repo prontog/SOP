@@ -1,6 +1,6 @@
 #!/usr/bin/tclsh
 
-# IMPORTANT: This file contains non-printable (invisible) characters SOH and 
+# IMPORTANT: This file contains non-printable (invisible) characters SOH and
 # ETX used by SOP. Make sure you edit it with an editor that can handle them.
 
 if { $argc != 2 } {
@@ -62,7 +62,7 @@ proc getNextMsg { buffer } {
 		#exit 1
 		return ""
 	}
-	
+
 	# Return the message PAYLOAD. Remember TCL strings are zero indexed.
 	return [string range $buffer [expr $HEADER_LEN] [expr $HEADER_LEN + $len - 1]]
 }
@@ -86,10 +86,10 @@ proc readMsg { channel ip port } {
 	set timeStamp [getTime]
 	set msg ""
     while {	[string length [set msg [getNextMsg $buffer]]] > 0 } {
-		# Log each incoming message in a separate line even if it was packaged 
+		# Log each incoming message in a separate line even if it was packaged
 		# in the same TCP segment with more messages.
 		puts "$timeStamp < $ip:$port $msg"
-		
+
 		set msg_type [string range $msg 0 1]
 		set responsePayload ""
 		switch $msg_type {
@@ -100,7 +100,7 @@ proc readMsg { channel ip port } {
 					puts "Invalid msg format. Msg will be ignored."
 					return 1
 				}
-				
+
 				incr msg_counter
 				incr ordnum_counter
 				set responsePayload [format {OC%.6d%c%3s%7s%-12s%8s%-16s%-16s} $ordnum_counter $side $type $volume $symbol $price $clientId $accountId]
@@ -110,11 +110,11 @@ proc readMsg { channel ip port } {
 				return 1
 			}
 		}
-		
+
 		set response [format {%.3d%s} [string length $responsePayload] $responsePayload]
 		puts -nonewline $channel $response
 		flush $channel
-		puts "[getTime] > $ip:$port $response"
+		puts "[getTime] > $ip:$port $responsePayload"
 
 		set buffer [string range $buffer [expr $HEADER_LEN + [string length $msg] + $TRAILER_LEN] end]
 	}
