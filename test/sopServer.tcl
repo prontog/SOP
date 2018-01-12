@@ -88,7 +88,7 @@ proc readMsg { channel ip port } {
     while {	[string length [set msg [getNextMsg $buffer]]] > 0 } {
 		# Log each incoming message in a separate line even if it was packaged
 		# in the same TCP segment with more messages.
-		puts "$timeStamp < $ip:$port $msg"
+		puts "$timeStamp < [format {%-21s} $ip:$port] $msg"
 
 		set msg_type [string range $msg 0 1]
 		set responsePayload ""
@@ -114,7 +114,7 @@ proc readMsg { channel ip port } {
 		set response [format {%.3d%s} [string length $responsePayload] $responsePayload]
 		puts -nonewline $channel $response
 		flush $channel
-		puts "[getTime] > $ip:$port $responsePayload"
+		puts "[getTime] > [format {%-21s} $ip:$port] $responsePayload"
 
 		set buffer [string range $buffer [expr $HEADER_LEN + [string length $msg] + $TRAILER_LEN] end]
 	}
