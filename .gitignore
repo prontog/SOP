@@ -2,3 +2,4 @@
 .vagrant
 Vagrantfile.local
 .Rhistory
+test/sopServer.tcl.pid
