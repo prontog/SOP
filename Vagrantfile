@@ -128,6 +128,8 @@ Vagrant.configure(2) do |config|
     sudo pip install --upgrade setuptools
     sudo pip install csvkit==0.9.1
 
+    # Install TCL
+    sudo apt-get install tcl -y
 
     # Add necessary env vars:
     echo Updating .bashrc
