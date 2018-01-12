@@ -26,6 +26,11 @@ Options:
 EOF
   exit 1
 }
+# Function to print an error message and exit with exit code 1.
+error() {
+	echo "${0##*/}: $1" > &2
+	exit 1
+}
 
 while getopts "h" option
 do
@@ -38,16 +43,14 @@ done
 shift $(( $OPTIND - 1 ))
 
 if [[ $# -eq 0 ]]; then
-    echo "No file given, SOP_SPECS_PATH is left unchanged." >&2
-	return
+    error "No file given, SOP_SPECS_PATH is left unchanged."
 fi
 
 FILE=$1
 DATE=$(echo $FILE | sed -nr 's/.*([[:digit:]]{4}[_-][[:digit:]]{2}[_-][[:digit:]]{2}).*/\1/p')
 
 if [[ -z $DATE ]]; then
-    echo "No date found in $FILE, SOP_SPECS_PATH is left unchanged." >&2
-	return
+    error "No date found in $FILE, SOP_SPECS_PATH is left unchanged."
 fi
 
 # Find the latest version at DATE. It concats vrsion.csv and a dummy line with
