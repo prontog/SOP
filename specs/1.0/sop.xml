@@ -1,12 +1,13 @@
 <?xml version="1.0" ?>
-<RECORD RECORDNAME="SOP log" COPYBOOK="" DELIMITER="&lt;Tab&gt;" FILESTRUCTURE="Default" STYLE="0" 
+<RECORD RECORDNAME="SOP log" COPYBOOK="" DELIMITER="&lt;Tab&gt;" FILESTRUCTURE="Default" STYLE="0"
         RECORDTYPE="GroupOfRecords" LIST="Y" QUOTE="" RecSep="default">
 	<RECORDS>
-		<RECORD RECORDNAME="SOP log: NO" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
+		<RECORD RECORDNAME="SOP log: NO" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
 		        DESCRIPTION="SOP log: NO" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="NO">
 			<FIELDS>
-				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
+                <FIELD NAME="Timestamp"  POSITION="1" LENGTH="12" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="13" LENGTH="3" TYPE="Char"/>
 				<FIELD NAME="msgType"  POSITION="16" LENGTH="2" TYPE="Char"/>
 				<FIELD NAME="side"  POSITION="18" LENGTH="1" TYPE="Char"/>
 				<FIELD NAME="type"  POSITION="19" LENGTH="3" TYPE="Char"/>
@@ -17,11 +18,12 @@
 				<FIELD NAME="accountId"  POSITION="65" LENGTH="16" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
-		<RECORD RECORDNAME="SOP log: OC" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
+		<RECORD RECORDNAME="SOP log: OC" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
 		        DESCRIPTION="SOP log: OC" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="OC">
 			<FIELDS>
-				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
+				<FIELD NAME="Timestamp"  POSITION="1" LENGTH="12" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="13" LENGTH="3" TYPE="Char"/>
 				<FIELD NAME="msgType"  POSITION="16" LENGTH="2" TYPE="Char"/>
 				<FIELD NAME="orderId"  POSITION="18" LENGTH="6" TYPE="Char"/>
 				<FIELD NAME="side"  POSITION="24" LENGTH="1" TYPE="Char"/>
@@ -33,11 +35,12 @@
 				<FIELD NAME="accountId"  POSITION="71" LENGTH="16" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
-		<RECORD RECORDNAME="SOP log: TR" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
+		<RECORD RECORDNAME="SOP log: TR" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
 		        DESCRIPTION="SOP log: TR" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="TR">
 			<FIELDS>
-				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
+				<FIELD NAME="Timestamp"  POSITION="1" LENGTH="12" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="13" LENGTH="3" TYPE="Char"/>
 				<FIELD NAME="msgType"  POSITION="16" LENGTH="2" TYPE="Char"/>
 				<FIELD NAME="tradeId"  POSITION="18" LENGTH="6" TYPE="Char"/>
 				<FIELD NAME="orderid"  POSITION="24" LENGTH="6" TYPE="Char"/>
@@ -46,33 +49,36 @@
 				<FIELD NAME="price"  POSITION="49" LENGTH="8" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
-		<RECORD RECORDNAME="SOP log: RJ" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
+		<RECORD RECORDNAME="SOP log: RJ" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
 		        DESCRIPTION="SOP log: RJ" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="RJ">
 			<FIELDS>
-				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
+				<FIELD NAME="Timestamp"  POSITION="1" LENGTH="12" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="13" LENGTH="3" TYPE="Char"/>
 				<FIELD NAME="msgType"  POSITION="16" LENGTH="2" TYPE="Char"/>
 				<FIELD NAME="clientId"  POSITION="18" LENGTH="16" TYPE="Char"/>
 				<FIELD NAME="rejectionCode"  POSITION="34" LENGTH="3" TYPE="Char"/>
 				<FIELD NAME="text"  POSITION="37" LENGTH="48" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
-		<RECORD RECORDNAME="SOP log: EN" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
+		<RECORD RECORDNAME="SOP log: EN" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
 		        DESCRIPTION="SOP log: EN" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="EN">
 			<FIELDS>
-				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
+				<FIELD NAME="Timestamp"  POSITION="1" LENGTH="12" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="13" LENGTH="3" TYPE="Char"/>
 				<FIELD NAME="msgType"  POSITION="16" LENGTH="2" TYPE="Char"/>
 				<FIELD NAME="textLen"  POSITION="18" LENGTH="4" TYPE="Char"/>
 				<FIELD NAME="text"  POSITION="22" LENGTH="0" TYPE="Char"/>
 				<FIELD NAME="source"  POSITION="22" LENGTH="16" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
-		<RECORD RECORDNAME="SOP log: BO" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
+		<RECORD RECORDNAME="SOP log: BO" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
 		        DESCRIPTION="SOP log: BO" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="BO">
 			<FIELDS>
-				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
+				<FIELD NAME="Timestamp"  POSITION="1" LENGTH="12" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="13" LENGTH="3" TYPE="Char"/>
 				<FIELD NAME="MsgType"  POSITION="16" LENGTH="2" TYPE="Char"/>
 				<FIELD NAME="Symbol"  POSITION="18" LENGTH="12" TYPE="Char"/>
 				<FIELD NAME="Number of levels"  POSITION="30" LENGTH="1" TYPE="Char"/>
@@ -85,11 +91,12 @@
 				<FIELD NAME="Offer Orders"  POSITION="66" LENGTH="5" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
-		<RECORD RECORDNAME="SOP log: LO" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
+		<RECORD RECORDNAME="SOP log: LO" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
 		        DESCRIPTION="SOP log: LO" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="LO">
 			<FIELDS>
-				<FIELD NAME="Header"  POSITION="1" LENGTH="15" TYPE="Char"/>
+				<FIELD NAME="Timestamp"  POSITION="1" LENGTH="12" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="13" LENGTH="3" TYPE="Char"/>
 				<FIELD NAME="msgType"  POSITION="16" LENGTH="2" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>

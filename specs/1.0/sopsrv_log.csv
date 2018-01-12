@@ -1,0 +1,3 @@
+Field,Length,Type,Description
+Timestamp,12,,"The timestamp of the log entry"
+direction,3,,"The direction of the message. < for incoming and > for outgoing"

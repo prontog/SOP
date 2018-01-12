@@ -1,0 +1,4 @@
+Field,Length,Type,Description
+Timestamp,12,,"The timestamp of the log entry"
+direction,3,,"The direction of the message. < for incoming and > for outgoing"
+ip_port,22,,"The IP and PORT of the connection separated by :"

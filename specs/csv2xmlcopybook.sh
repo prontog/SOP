@@ -7,14 +7,18 @@ Usage: ${0##*/} -p PROT [OPTIONS] CSV_SPEC...
 Converts CVS specs into XML Copybook format for RecordEditor. The XML Copybook is output to STDOUT.
 
 Options:
-  -p=PROT   the name to be used as RECORDNAME in the main RECORD tag as well
-              as a prefix to the RECORDNAME of each child RECORD tag
-  -h        display this text and exit
-  -H=LEN    the length of the header field of each RECORD. This can be handy
-              if you need to skip some characters from the start of the line
+  -p=PROT        the name to be used as RECORDNAME in the main RECORD tag as well
+                 as a prefix to the RECORDNAME of each child RECORD tag
+  -h             display this text and exit
+  -H=LEN         the length of the header field of each RECORD. This can be handy
+                 if you need to skip some characters from the start of the line
+  -F=HEADER_SPEC a CSV spec for the header. Instead of specifying a fixed header
+                 length wiht option -H you can use -F to specify a specific
+                 format for the header.
 
 Example:
   ${0##*/} -p sop -H 10 OC.csv NO.csv TR.csv
+  ${0##*/} -p sop -F sopsrv_log.csv OC.csv NO.csv TR.csv
 
 EOF
   exit 1
@@ -26,11 +30,12 @@ error() {
 }
 
 # Handle CLI options.
-while getopts "hp:H:" option
+while getopts "hp:H:F:" option
 do
 case $option in
     p) PROTOCOL_NAME=$OPTARG;;
 	H) HEADER_LEN=$OPTARG;;
+    F) HEADER_SPEC=$OPTARG;;
 	h) usage;;
 	\?) exit 1;;
 esac
@@ -39,6 +44,10 @@ shift $(( $OPTIND - 1 ))
 
 if [[ -z $PROTOCOL_NAME ]]; then
     error "-p is not optional"
+fi
+
+if [[ -n $HEADER_SPEC ]] && [[ ! -f $HEADER_SPEC ]]; then
+    error "HEADER_SPEC [$HEADER_SPEC] is not a file"
 fi
 
 if [[ $# -lt 1 ]]; then
@@ -71,18 +80,19 @@ EOF
 		echo '				<FIELD NAME="Header"  POSITION="1" LENGTH="'$HEADER_LEN'" TYPE="Char"/>'
 	fi
 
+
 	awk -v header_len=$HEADER_LEN '
 	BEGIN {
 		FS = ","
 		f_position = header_len + 1
 	}
-	NR != 1 {
+	FNR != 1 {
 		f_name = $1
 		f_length = $2
 		printf "\t\t\t\t<FIELD NAME=\"%s\"  POSITION=\"%d\" LENGTH=\"%d\" TYPE=\"Char\"/>\n", f_name, f_position, f_length
 		f_position += f_length
 	}
-	' $s
+	' $HEADER_SPEC $s
 cat <<EOF
 			</FIELDS>
 		</RECORD>

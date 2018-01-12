@@ -9,8 +9,7 @@ sop: $(sop_specs) sop.xml sop_dissector.zip
 	touch $@
 
 sop.xml: $(sop_specs)
-	#length of "09:58:17.300 < 192.168.100.100:61350 " is 37
-	./csv2xmlcopybook.sh -H 37 -p "SOP log" $? > $@
+	./csv2xmlcopybook.sh -F sopsrv_log.csv -p "SOP log" $? > $@
 
 sop_dissector.zip: $(sop_specs) $(dissectors)
 	@echo Packing dissector into dissector.zip...
