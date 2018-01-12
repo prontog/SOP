@@ -9,8 +9,8 @@ sop: $(sop_specs) sop.xml sop_dissector.zip
 	touch $@
 
 sop.xml: $(sop_specs)
-	#length of "09:20:05.034 < " is 15
-	./csv2xmlcopybook.sh -H 15 -p "SOP log" $? > $@
+	#length of "09:58:17.300 < 192.168.56.1:61350 " is 34
+	./csv2xmlcopybook.sh -H 34 -p "SOP log" $? > $@
 
 sop_dissector.zip: $(sop_specs) $(dissectors)
 	@echo Packing dissector into dissector.zip...
@@ -25,7 +25,7 @@ $(sop_mdtables): $(sop_md)
 	./sop_split_to_mdtable.sh $?
 
 .INTERMEDIATE: $(sop_mdtables)
-	
+
 %.md: %.docx
 	# Convert documentation from docx format to md.
 	pandoc --smart --filter ./despan.py --to markdown_github $? | iconv -f utf8 -t ascii//TRANSLIT > $@
