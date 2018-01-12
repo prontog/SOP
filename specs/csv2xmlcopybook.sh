@@ -6,7 +6,7 @@ usage() {
 Usage: ${0##*/} -p PROT [OPTIONS] CSV_SPEC...
 Converts CVS specs into XML Copybook format for RecordEditor. The XML Copybook is output to STDOUT.
 
-Options:  
+Options:
   -p=PROT   the name to be used as RECORDNAME in the main RECORD tag as well
               as a prefix to the RECORDNAME of each child RECORD tag
   -h        display this text and exit
@@ -21,7 +21,7 @@ EOF
 }
 # Function to print an error message and exit with exit code 1.
 error() {
-	echo "${0##*/}: $1" > &2
+	echo "${0##*/}: $1" >&2
 	exit 1
 }
 
@@ -49,7 +49,7 @@ set -o errexit
 
 cat <<EOF
 <?xml version="1.0" ?>
-<RECORD RECORDNAME="$PROTOCOL_NAME" COPYBOOK="" DELIMITER="&lt;Tab&gt;" FILESTRUCTURE="Default" STYLE="0" 
+<RECORD RECORDNAME="$PROTOCOL_NAME" COPYBOOK="" DELIMITER="&lt;Tab&gt;" FILESTRUCTURE="Default" STYLE="0"
         RECORDTYPE="GroupOfRecords" LIST="Y" QUOTE="" RecSep="default">
 	<RECORDS>
 EOF
@@ -61,7 +61,7 @@ for s in $*; do
 
 	SPEC_NAME=${s/.csv/}
 cat <<EOF
-		<RECORD RECORDNAME="$PROTOCOL_NAME: $SPEC_NAME" COPYBOOK="" DELIMITER="&lt;Tab&gt;" 
+		<RECORD RECORDNAME="$PROTOCOL_NAME: $SPEC_NAME" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
 		        DESCRIPTION="$PROTOCOL_NAME: $SPEC_NAME" FILESTRUCTURE="Default" STYLE="0" RECORDTYPE="RecordLayout"
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="$SPEC_NAME">
 			<FIELDS>
