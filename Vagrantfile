@@ -107,9 +107,19 @@ Vagrant.configure(2) do |config|
     sudo apt-get install zip -y
 
 	# Install R
-	#sudo apt-get install -y libssl-dev libcurl4-openssl-dev
-    #sudo apt-get install -y r-base r-base-dev
-	#sudo Rscript /vagrant/stats/prepare_r_env.R
+	sudo apt-get install -y libssl-dev libcurl4-openssl-dev
+    sudo apt-get install -y r-base r-base-dev
+	sudo Rscript /vagrant/stats/prepare_r_env.R
+    #cd /vagrant/stats
+    #sudo R CMD INSTALL . athex
+    # RStudio Server
+    RSTUDIO_VERSION=1.1.383
+    sudo apt-get install -y gdebi-core
+    curl -R -O -s https://download2.rstudio.org/rstudio-server-${RSTUDIO_VERSION}-amd64.deb
+    sudo dpkg --install rstudio-server-${RSTUDIO_VERSION}-amd64.deb
+    sudo systemctl enable rstudio-server.service
+    # To login to rstudio-server you need to create a user and add the user to
+    # rstudio-server group. Make sure the user has a home dir too!
 
 	# Install tshark
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y tshark
@@ -123,7 +133,7 @@ Vagrant.configure(2) do |config|
 	ln -s /vagrant/network/init.lua ~/.wireshark/
 
     # Install csvkit
-    sudo apt-get install python-pip
+    sudo apt-get install -y python-pip
     sudo pip install --upgrade pip
     sudo pip install --upgrade setuptools
     sudo pip install csvkit==0.9.1
