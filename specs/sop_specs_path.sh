@@ -28,7 +28,7 @@ EOF
 }
 # Function to print an error message and exit with exit code 1.
 error() {
-	echo "${0##*/}: $1" > &2
+	echo "${0##*/}: $1" >&2
 	exit 1
 }
 
