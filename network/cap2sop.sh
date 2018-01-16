@@ -4,7 +4,7 @@
 usage() {
   cat <<EOF
 Usage: ${0##*/} [OPTION] CAP_FILE...
-Extract SOP message information from CAP_FILEs.
+Extract SOP message information from CAP_FILEs in CSV format.
 
 Options:
   -h	display this help text and exit
