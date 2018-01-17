@@ -1,4 +1,4 @@
 Field,Length,Type,Description
-timestamp,23,,"The timestamp of the log entry"
-direction,3,,"The direction of the message. < for incoming and > for outgoing"
-ip_port,22,,"The IP and PORT of the connection separated by :"
+timestamp,23,DATETIME,"The timestamp of the log entry"
+direction,3,STRING,"The direction of the message. < for incoming and > for outgoing"
+ip_port,22,STRING,"The IP and PORT of the connection separated by :"
