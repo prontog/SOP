@@ -4,7 +4,7 @@
 usage() {
   cat <<EOF
 Usage: ${0##*/} [OPTION...] IP PORT
-Connect to a SOP server at IP:PORT send each line read from STDIN
+Connect to a SOP server at IP:PORT and send each line read from STDIN
 
 Options:
   -h	 display this help text and exit
