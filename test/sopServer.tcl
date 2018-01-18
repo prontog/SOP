@@ -16,17 +16,23 @@ if { $argc != 2 } {
 set HEADER_LEN 4
 set TRAILER_LEN 1
 
+# Logging proc.
+proc log {message} {
+    puts "[getTime]: $message"
+}
+
+
 # Get current time.
 proc getTime {} {
 	set t [clock milliseconds]
-	return [format "%s.%03d" [clock format [expr {$t / 1000}] -format %T] [expr {$t % 1000}]]
+	return [format "%s.%03d" [clock format [expr {$t / 1000}] -format "%Y-%m-%d %T"] [expr {$t % 1000}]]
 }
 
 # Background errors handler. Necessary since we use non blocking I/O.
 proc bgerror msg {
     # Copy this immediately, as �clock format� is implemented in Tcl internally
     set stackTrace $::errorInfo
-    puts "[getTime]: $msg\n$stackTrace"
+    log "$msg\n$stackTrace"
 }
 
 proc getNextMsg { buffer } {
@@ -38,7 +44,7 @@ proc getNextMsg { buffer } {
 	}
 	# Make sure the buffer starts with SOH.
 	if { [string first \x01 $buffer]  != 0 } {
-		puts "Missing SOH field. Msg will be ignored. \[$buffer\]"
+		log "Missing SOH field. Msg will be ignored. \[$buffer\]"
 		#close $channel
 		#exit 1
 		return ""
@@ -46,18 +52,18 @@ proc getNextMsg { buffer } {
 	# Read the LEN field.
 	set nf [scan $buffer {%3d} len]
 	if { $nf != 1 } {
-		puts "Missing LEN field. Msg will be ignored. \[$buffer\]"
+		log "Missing LEN field. Msg will be ignored. \[$buffer\]"
 		return ""
 	}
 	# Make sure the buffer has enough size for the whole message.
 	set msgLen [expr $HEADER_LEN + $len + $TRAILER_LEN]
 	if { [string length $buffer] != $msgLen } {
-		puts "Incomplete msg. Msg will be ignored. \[$buffer\]"
+		log "Incomplete msg. Msg will be ignored. \[$buffer\]"
 		return ""
 	}
 	# Make sure the message ends with ETX.
 	if { [string compare [string index $buffer [expr $msgLen - 1]] \x03] != 0 } {
-		puts "Missing ETX field. Msg will be ignored. \[$buffer\]"
+		log "Missing ETX field. Msg will be ignored. \[$buffer\]"
 		#close $channel
 		#exit 1
 		return ""
@@ -72,9 +78,11 @@ proc readMsg { channel ip port } {
 	global TRAILER_LEN
 	global msg_counter
 	global ordnum_counter
+    global local_ip
+    global local_port
 
 	if { [eof $channel] } {
-		puts "EOF on channel. Disconnecting from $ip:$port."
+		log "EOF on channel. Disconnecting from $ip:$port."
 		close $channel
 		set forever 0
 		return
@@ -88,7 +96,7 @@ proc readMsg { channel ip port } {
     while {	[string length [set msg [getNextMsg $buffer]]] > 0 } {
 		# Log each incoming message in a separate line even if it was packaged
 		# in the same TCP segment with more messages.
-		puts "$timeStamp < [format {%-21s} $ip:$port] $msg"
+		puts "$timeStamp [format {%-21s} $local_ip:$local_port] < [format {%-21s} $ip:$port] $msg"
 
 		set msg_type [string range $msg 0 1]
 		set responsePayload ""
@@ -97,7 +105,7 @@ proc readMsg { channel ip port } {
 				set nf [scan $msg {%2s%c%3s%7s%12[ a-zA-Z0-9]%8s%16[ a-zA-Z0-9]%16[ a-zA-Z0-9]} msg_type side type volume symbol price clientId accountId]
 
 				if { $nf != 8 } {
-					puts "Invalid msg format. Msg will be ignored."
+					log "Invalid msg format. Msg will be ignored."
 					return 1
 				}
 
@@ -106,7 +114,7 @@ proc readMsg { channel ip port } {
 				set responsePayload [format {OC%.6d%c%3s%7s%-12s%8s%-16s%-16s} $ordnum_counter $side $type $volume $symbol $price $clientId $accountId]
 			}
 			default {
-				puts "Unknown msg type \[$msg_type\]. Msg will be ignored."
+				log "Unknown msg type \[$msg_type\]. Msg will be ignored."
 				return 1
 			}
 		}
@@ -114,7 +122,7 @@ proc readMsg { channel ip port } {
 		set response [format {%.3d%s} [string length $responsePayload] $responsePayload]
 		puts -nonewline $channel $response
 		flush $channel
-		puts "[getTime] > [format {%-21s} $ip:$port] $responsePayload"
+		puts "[getTime] [format {%-21s} $local_ip:$local_port] > [format {%-21s} $ip:$port] $responsePayload"
 
 		set buffer [string range $buffer [expr $HEADER_LEN + [string length $msg] + $TRAILER_LEN] end]
 	}
@@ -122,7 +130,7 @@ proc readMsg { channel ip port } {
 
 # Handle the connection.
 proc acceptCon {channel ip port} {
-	puts "Connection from $ip:$port"
+	log "Connection from $ip:$port"
 
 	fconfigure $channel -blocking 0
 	# -buffering none -translation binary
@@ -138,5 +146,5 @@ set msg_counter 0
 set ordnum_counter 0
 # Listen for connections.
 socket -server acceptCon -myaddr $local_ip $local_port
-puts "Listening for SOP connections on $local_ip:$local_port"
+log "Listening for SOP connections on $local_ip:$local_port"
 vwait forever

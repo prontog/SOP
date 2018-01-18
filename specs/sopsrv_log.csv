@@ -1,4 +1,9 @@
 Field,Length,Type,Description
 timestamp,23,DATETIME,"The timestamp of the log entry"
-direction,3,STRING,"The direction of the message. < for incoming and > for outgoing"
-ip_port,22,STRING,"The IP and PORT of the connection separated by :"
+_spc1,1,STRING,"A space for readability"
+server_ip_port,21,STRING,"The source IP and PORT separated by :"
+_spc2,1,STRING,"A space for readability"
+direction,1,STRING,"The direction of the message. < for incoming and > for outgoing"
+_spc3,1,STRING,"A space for readability"
+client_ip_port,21,STRING,"The destination IP and PORT separated by :"
+_spc4,1,STRING,"A space for readability"

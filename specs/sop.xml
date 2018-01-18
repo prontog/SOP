@@ -7,16 +7,21 @@
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="NO">
 			<FIELDS>
 				<FIELD NAME="timestamp"  POSITION="1" LENGTH="23" TYPE="Char"/>
-				<FIELD NAME="direction"  POSITION="24" LENGTH="3" TYPE="Char"/>
-				<FIELD NAME="ip_port"  POSITION="27" LENGTH="22" TYPE="Char"/>
-				<FIELD NAME="msgType"  POSITION="49" LENGTH="2" TYPE="Char"/>
-				<FIELD NAME="side"  POSITION="51" LENGTH="1" TYPE="Char"/>
-				<FIELD NAME="type"  POSITION="52" LENGTH="3" TYPE="Char"/>
-				<FIELD NAME="volume"  POSITION="55" LENGTH="7" TYPE="Char"/>
-				<FIELD NAME="symbol"  POSITION="62" LENGTH="12" TYPE="Char"/>
-				<FIELD NAME="price"  POSITION="74" LENGTH="8" TYPE="Char"/>
-				<FIELD NAME="clientId"  POSITION="82" LENGTH="16" TYPE="Char"/>
-				<FIELD NAME="accountId"  POSITION="98" LENGTH="16" TYPE="Char"/>
+				<FIELD NAME="_spc1"  POSITION="24" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="server_ip_port"  POSITION="25" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc2"  POSITION="46" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="47" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="_spc3"  POSITION="48" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="client_ip_port"  POSITION="49" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc4"  POSITION="70" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="msgType"  POSITION="71" LENGTH="2" TYPE="Char"/>
+				<FIELD NAME="side"  POSITION="73" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="type"  POSITION="74" LENGTH="3" TYPE="Char"/>
+				<FIELD NAME="volume"  POSITION="77" LENGTH="7" TYPE="Char"/>
+				<FIELD NAME="symbol"  POSITION="84" LENGTH="12" TYPE="Char"/>
+				<FIELD NAME="price"  POSITION="96" LENGTH="8" TYPE="Char"/>
+				<FIELD NAME="clientId"  POSITION="104" LENGTH="16" TYPE="Char"/>
+				<FIELD NAME="accountId"  POSITION="120" LENGTH="16" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: OC" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
@@ -24,17 +29,22 @@
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="OC">
 			<FIELDS>
 				<FIELD NAME="timestamp"  POSITION="1" LENGTH="23" TYPE="Char"/>
-				<FIELD NAME="direction"  POSITION="24" LENGTH="3" TYPE="Char"/>
-				<FIELD NAME="ip_port"  POSITION="27" LENGTH="22" TYPE="Char"/>
-				<FIELD NAME="msgType"  POSITION="49" LENGTH="2" TYPE="Char"/>
-				<FIELD NAME="orderId"  POSITION="51" LENGTH="6" TYPE="Char"/>
-				<FIELD NAME="side"  POSITION="57" LENGTH="1" TYPE="Char"/>
-				<FIELD NAME="type"  POSITION="58" LENGTH="3" TYPE="Char"/>
-				<FIELD NAME="volume"  POSITION="61" LENGTH="7" TYPE="Char"/>
-				<FIELD NAME="symbol"  POSITION="68" LENGTH="12" TYPE="Char"/>
-				<FIELD NAME="price"  POSITION="80" LENGTH="8" TYPE="Char"/>
-				<FIELD NAME="clientId"  POSITION="88" LENGTH="16" TYPE="Char"/>
-				<FIELD NAME="accountId"  POSITION="104" LENGTH="16" TYPE="Char"/>
+				<FIELD NAME="_spc1"  POSITION="24" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="server_ip_port"  POSITION="25" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc2"  POSITION="46" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="47" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="_spc3"  POSITION="48" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="client_ip_port"  POSITION="49" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc4"  POSITION="70" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="msgType"  POSITION="71" LENGTH="2" TYPE="Char"/>
+				<FIELD NAME="orderId"  POSITION="73" LENGTH="6" TYPE="Char"/>
+				<FIELD NAME="side"  POSITION="79" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="type"  POSITION="80" LENGTH="3" TYPE="Char"/>
+				<FIELD NAME="volume"  POSITION="83" LENGTH="7" TYPE="Char"/>
+				<FIELD NAME="symbol"  POSITION="90" LENGTH="12" TYPE="Char"/>
+				<FIELD NAME="price"  POSITION="102" LENGTH="8" TYPE="Char"/>
+				<FIELD NAME="clientId"  POSITION="110" LENGTH="16" TYPE="Char"/>
+				<FIELD NAME="accountId"  POSITION="126" LENGTH="16" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: TR" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
@@ -42,14 +52,19 @@
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="TR">
 			<FIELDS>
 				<FIELD NAME="timestamp"  POSITION="1" LENGTH="23" TYPE="Char"/>
-				<FIELD NAME="direction"  POSITION="24" LENGTH="3" TYPE="Char"/>
-				<FIELD NAME="ip_port"  POSITION="27" LENGTH="22" TYPE="Char"/>
-				<FIELD NAME="msgType"  POSITION="49" LENGTH="2" TYPE="Char"/>
-				<FIELD NAME="tradeId"  POSITION="51" LENGTH="6" TYPE="Char"/>
-				<FIELD NAME="orderid"  POSITION="57" LENGTH="6" TYPE="Char"/>
-				<FIELD NAME="volume"  POSITION="63" LENGTH="7" TYPE="Char"/>
-				<FIELD NAME="symbol"  POSITION="70" LENGTH="12" TYPE="Char"/>
-				<FIELD NAME="price"  POSITION="82" LENGTH="8" TYPE="Char"/>
+				<FIELD NAME="_spc1"  POSITION="24" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="server_ip_port"  POSITION="25" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc2"  POSITION="46" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="47" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="_spc3"  POSITION="48" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="client_ip_port"  POSITION="49" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc4"  POSITION="70" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="msgType"  POSITION="71" LENGTH="2" TYPE="Char"/>
+				<FIELD NAME="tradeId"  POSITION="73" LENGTH="6" TYPE="Char"/>
+				<FIELD NAME="orderid"  POSITION="79" LENGTH="6" TYPE="Char"/>
+				<FIELD NAME="volume"  POSITION="85" LENGTH="7" TYPE="Char"/>
+				<FIELD NAME="symbol"  POSITION="92" LENGTH="12" TYPE="Char"/>
+				<FIELD NAME="price"  POSITION="104" LENGTH="8" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: RJ" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
@@ -57,12 +72,17 @@
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="RJ">
 			<FIELDS>
 				<FIELD NAME="timestamp"  POSITION="1" LENGTH="23" TYPE="Char"/>
-				<FIELD NAME="direction"  POSITION="24" LENGTH="3" TYPE="Char"/>
-				<FIELD NAME="ip_port"  POSITION="27" LENGTH="22" TYPE="Char"/>
-				<FIELD NAME="msgType"  POSITION="49" LENGTH="2" TYPE="Char"/>
-				<FIELD NAME="clientId"  POSITION="51" LENGTH="16" TYPE="Char"/>
-				<FIELD NAME="rejectionCode"  POSITION="67" LENGTH="3" TYPE="Char"/>
-				<FIELD NAME="text"  POSITION="70" LENGTH="60" TYPE="Char"/>
+				<FIELD NAME="_spc1"  POSITION="24" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="server_ip_port"  POSITION="25" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc2"  POSITION="46" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="47" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="_spc3"  POSITION="48" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="client_ip_port"  POSITION="49" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc4"  POSITION="70" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="msgType"  POSITION="71" LENGTH="2" TYPE="Char"/>
+				<FIELD NAME="clientId"  POSITION="73" LENGTH="16" TYPE="Char"/>
+				<FIELD NAME="rejectionCode"  POSITION="89" LENGTH="3" TYPE="Char"/>
+				<FIELD NAME="text"  POSITION="92" LENGTH="60" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: EN" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
@@ -70,12 +90,17 @@
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="EN">
 			<FIELDS>
 				<FIELD NAME="timestamp"  POSITION="1" LENGTH="23" TYPE="Char"/>
-				<FIELD NAME="direction"  POSITION="24" LENGTH="3" TYPE="Char"/>
-				<FIELD NAME="ip_port"  POSITION="27" LENGTH="22" TYPE="Char"/>
-				<FIELD NAME="msgType"  POSITION="49" LENGTH="2" TYPE="Char"/>
-				<FIELD NAME="textLen"  POSITION="51" LENGTH="4" TYPE="Char"/>
-				<FIELD NAME="text"  POSITION="55" LENGTH="0" TYPE="Char"/>
-				<FIELD NAME="source"  POSITION="55" LENGTH="16" TYPE="Char"/>
+				<FIELD NAME="_spc1"  POSITION="24" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="server_ip_port"  POSITION="25" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc2"  POSITION="46" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="47" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="_spc3"  POSITION="48" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="client_ip_port"  POSITION="49" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc4"  POSITION="70" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="msgType"  POSITION="71" LENGTH="2" TYPE="Char"/>
+				<FIELD NAME="textLen"  POSITION="73" LENGTH="4" TYPE="Char"/>
+				<FIELD NAME="text"  POSITION="77" LENGTH="0" TYPE="Char"/>
+				<FIELD NAME="source"  POSITION="77" LENGTH="16" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: BO" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
@@ -83,18 +108,23 @@
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="BO">
 			<FIELDS>
 				<FIELD NAME="timestamp"  POSITION="1" LENGTH="23" TYPE="Char"/>
-				<FIELD NAME="direction"  POSITION="24" LENGTH="3" TYPE="Char"/>
-				<FIELD NAME="ip_port"  POSITION="27" LENGTH="22" TYPE="Char"/>
-				<FIELD NAME="MsgType"  POSITION="49" LENGTH="2" TYPE="Char"/>
-				<FIELD NAME="Symbol"  POSITION="51" LENGTH="12" TYPE="Char"/>
-				<FIELD NAME="Number of levels"  POSITION="63" LENGTH="1" TYPE="Char"/>
-				<FIELD NAME="Levels"  POSITION="64" LENGTH="0" TYPE="Char"/>
-				<FIELD NAME="Bid Volume"  POSITION="64" LENGTH="7" TYPE="Char"/>
-				<FIELD NAME="Bid Price"  POSITION="71" LENGTH="8" TYPE="Char"/>
-				<FIELD NAME="Bid Orders"  POSITION="79" LENGTH="5" TYPE="Char"/>
-				<FIELD NAME="Offer Volume"  POSITION="84" LENGTH="7" TYPE="Char"/>
-				<FIELD NAME="Offer Price"  POSITION="91" LENGTH="8" TYPE="Char"/>
-				<FIELD NAME="Offer Orders"  POSITION="99" LENGTH="5" TYPE="Char"/>
+				<FIELD NAME="_spc1"  POSITION="24" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="server_ip_port"  POSITION="25" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc2"  POSITION="46" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="47" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="_spc3"  POSITION="48" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="client_ip_port"  POSITION="49" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc4"  POSITION="70" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="MsgType"  POSITION="71" LENGTH="2" TYPE="Char"/>
+				<FIELD NAME="Symbol"  POSITION="73" LENGTH="12" TYPE="Char"/>
+				<FIELD NAME="Number of levels"  POSITION="85" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="Levels"  POSITION="86" LENGTH="0" TYPE="Char"/>
+				<FIELD NAME="Bid Volume"  POSITION="86" LENGTH="7" TYPE="Char"/>
+				<FIELD NAME="Bid Price"  POSITION="93" LENGTH="8" TYPE="Char"/>
+				<FIELD NAME="Bid Orders"  POSITION="101" LENGTH="5" TYPE="Char"/>
+				<FIELD NAME="Offer Volume"  POSITION="106" LENGTH="7" TYPE="Char"/>
+				<FIELD NAME="Offer Price"  POSITION="113" LENGTH="8" TYPE="Char"/>
+				<FIELD NAME="Offer Orders"  POSITION="121" LENGTH="5" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
 		<RECORD RECORDNAME="SOP log: LO" COPYBOOK="" DELIMITER="&lt;Tab&gt;"
@@ -102,9 +132,14 @@
 			LIST="N" QUOTE="" RecSep="default" TESTFIELD="MessageType" TESTVALUE="LO">
 			<FIELDS>
 				<FIELD NAME="timestamp"  POSITION="1" LENGTH="23" TYPE="Char"/>
-				<FIELD NAME="direction"  POSITION="24" LENGTH="3" TYPE="Char"/>
-				<FIELD NAME="ip_port"  POSITION="27" LENGTH="22" TYPE="Char"/>
-				<FIELD NAME="msgType"  POSITION="49" LENGTH="2" TYPE="Char"/>
+				<FIELD NAME="_spc1"  POSITION="24" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="server_ip_port"  POSITION="25" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc2"  POSITION="46" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="direction"  POSITION="47" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="_spc3"  POSITION="48" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="client_ip_port"  POSITION="49" LENGTH="21" TYPE="Char"/>
+				<FIELD NAME="_spc4"  POSITION="70" LENGTH="1" TYPE="Char"/>
+				<FIELD NAME="msgType"  POSITION="71" LENGTH="2" TYPE="Char"/>
 			</FIELDS>
 		</RECORD>
 	</RECORDS>
