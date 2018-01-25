@@ -32,6 +32,8 @@ error() {
 	exit 1
 }
 
+# OPTIND needs to be reset since this script is supposed to be sourced.
+OPTIND=1
 while getopts "h" option
 do
 	case $option in
