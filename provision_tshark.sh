@@ -6,6 +6,7 @@ NPROC=$(grep processor /proc/cpuinfo | wc -l)
 
 # Wireshark
 sudo apt-get install build-essential -y
+sudo apt-get install autoconf -y
 sudo apt-get install libglib2.0-dev -y
 sudo apt-get install libpcap-dev -y
 sudo apt-get install libgcrypt20-dev -y
