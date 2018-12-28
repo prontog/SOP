@@ -89,57 +89,15 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     set -o errexit
+    set -x
+
     sudo apt-get update
+    sudo apt-get upgrade -y
 
-    # Install python
-    sudo apt-get install python -y
-
-	# Install Pandoc
-    # PANDOC_VERSION=1.19.2.1
-    curl -LR -O -s https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb
-    sudo dpkg --install pandoc-1.19.2.1-1-amd64.deb
-    git clone https://github.com/jgm/pandocfilters
-    cd pandocfilters
-    sudo python setup.py install
-    cd
-
-    # Install ZIP
-    sudo apt-get install zip -y
-
-	# Install R
-	sudo apt-get install -y libssl-dev libcurl4-openssl-dev
-    sudo apt-get install -y r-base r-base-dev
-	sudo Rscript /vagrant/stats/prepare_r_env.R
-    #cd /vagrant/stats
-    #sudo R CMD INSTALL . athex
-    # RStudio Server
-    RSTUDIO_VERSION=1.1.383
-    sudo apt-get install -y gdebi-core
-    curl -R -O -s https://download2.rstudio.org/rstudio-server-${RSTUDIO_VERSION}-amd64.deb
-    sudo dpkg --install rstudio-server-${RSTUDIO_VERSION}-amd64.deb
-    sudo systemctl enable rstudio-server.service
-    # To login to rstudio-server you need to create a user and add the user to
-    # rstudio-server group. Make sure the user has a home dir too!
-
-	# Install tshark
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y tshark
-	# Allow current user to access the network interfaces.
-	sudo groupadd wireshark
-	sudo usermod -a -G wireshark $(whoami)
-	sudo setcap cap_net_raw,cap_net_admin=eip $(which dumpcap)
-	# Clone ws_dissector_helper
-	git clone https://github.com/prontog/ws_dissector_helper
-	mkdir ~/.wireshark
-	ln -s /vagrant/network/init.lua ~/.wireshark/
-
-    # Install csvkit
-    sudo apt-get install -y python-pip
-    sudo pip install --upgrade pip
-    sudo pip install --upgrade setuptools
-    sudo pip install csvkit==0.9.1
-
-    # Install TCL
-    sudo apt-get install tcl -y
+    /vagrant/provision.sh
+    /vagrant/provision_pandoc.sh
+    /vagrant/provision_R.sh
+    /vagrant/provision_tshark.sh
 
     # Add necessary env vars:
     echo Updating .bashrc
